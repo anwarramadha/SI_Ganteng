@@ -1,0 +1,134 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* ---------- FONTAWESOME ---------- */
+/* ---------- http://fortawesome.github.com/Font-Awesome/ ---------- */
+/* ---------- http://weloveiconfonts.com/ ---------- */
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+span[class*="fontawesome-"]:before {
+	font-family: 'FontAwesome', sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* ---------- GENERAL ---------- */
+
+body {
+	background: #e7e7e7;
+	font: 16px/1.5em "Open Sans", sans-serif;
+	margin: 0;
+}
+
+a { text-decoration: none !important; }
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.clearfix { *zoom: 1; }
+.clearfix:before, .clearfix:after {
+	content: "";
+	display: table;	
+}
+.clearfix:after { clear: both; }
+
+.container {
+	display: block;
+	height: 64px;
+	left: 50%;
+	margin: -32px 0 0 -128px; /* -(height / 2) & -(width / 2) */
+	position: absolute;
+	top: 50%;
+	width: 256px;
+}
+
+/* ---------- Action Bar ---------- */
+
+.action-bar li {
+	float: left;
+	position: static !important;
+}
+
+.action-bar a {
+	-webkit-box-shadow: inset 0 -2px rgba(0, 0, 0, .5);
+	box-shadow: inset 0 -2px rgba(0, 0, 0, .5);
+	color: #000000;
+	display: block;
+	font-size: 16px !important;
+	height: 40px;
+	line-height: 30px;
+	position: relative;
+	text-align: center;
+	-webkit-transition: background .3s;
+	-moz-transition: background .3s;
+	-ms-transition: background .3s;
+	-o-transition: background .3s;
+	transition: background .3s;
+	width: 150px;
+	left: 10px;
+	margin-top: 17px;
+}
+
+.action-bar a:hover {
+	color: #2775f4;
+}
+
+.action-bar a:hover .tooltip {
+	margin-top: 16px;
+	opacity: 1;
+}
+
+.tooltip {
+	border-radius: 3px;
+	font-size: 14px;
+	height: 28px;
+	left: 50%;
+	line-height: 28px;
+	margin: 0 0 0 -50px;
+	opacity: 0;
+	position: absolute;
+	top: 100%;
+	-webkit-transition: margin-top .3s, opacity .3s;
+	-moz-transition: margin-top .3s, opacity .3s;
+	-ms-transition: margin-top .3s, opacity .3s;
+	-o-transition: margin-top .3s, opacity .3s;
+	transition: margin-top .3s, opacity .3s;
+	width: 100px;
+}
+
+.tooltip:before {
+	content: "";
+	height: 8px;
+	left: 50%;
+	margin: -4px 0 0 -4px;
+	position: absolute;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+	width: 8px;
+}
+
+.like,
+.like .tooltip,
+.like .tooltip:before { background: #43f9f5; }
+.like:hover { background: #adfffd; }
+
+.favourite,
+.favourite .tooltip,
+.favourite .tooltip:before { background: #c93037; }
+.favourite:hover { background: #b02b32; }
+
+.comment,
+.comment .tooltip,
+.comment .tooltip:before { background: #43438e; }
+.comment:hover { background: #393978; }
+
+.share,
+.share .tooltip,
+.share .tooltip:before { background: #394957; }
+.share:hover { background: ; }

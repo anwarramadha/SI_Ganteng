@@ -1,0 +1,8 @@
+.no-border{
+	border: 10px;
+	outline: 2px;
+	background: white;
+	float:left;
+	padding-top: 7px;
+	padding-left: 10px;
+}
