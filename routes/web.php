@@ -10,11 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\EmployeeList;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard', function () {
-    return view('dashboard');
-});
+Route::get('employees', 'EmployeeList@getEmployeesData');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+Route::get('getemployeedata/{id}', 'EmployeeList@getEmployeeData');

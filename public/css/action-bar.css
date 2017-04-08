@@ -67,7 +67,7 @@ ul {
 	-ms-transition: background .3s;
 	-o-transition: background .3s;
 	transition: background .3s;
-	width: 150px;
+	width: 180px;
 	left: 10px;
 	margin-top: 17px;
 }
@@ -132,3 +132,24 @@ ul {
 .share .tooltip,
 .share .tooltip:before { background: #394957; }
 .share:hover { background: ; }
+
+.employee-biodata{
+	f-webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+    -webkit-column-gap: 20px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 20px; /* Firefox */
+    column-gap: 20px;
+    -webkit-column-rule-style: solid; /* Chrome, Safari, Opera */
+    -moz-column-rule-style: solid; /* Firefox */
+    column-rule-style: solid;
+    column-width: 30px;
+    column-rule-width: 1px;
+    padding-top: 25px;
+    padding-left: 34px;
+}
+
+.training-score-title {
+	padding-top: 20px;
+	padding-left: 34px;
+}
