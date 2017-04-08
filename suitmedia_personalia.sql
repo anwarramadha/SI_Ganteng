@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 04, 2017 at 05:56 PM
--- Server version: 5.7.17-0ubuntu0.16.04.1
+-- Generation Time: Apr 08, 2017 at 02:42 PM
+-- Server version: 5.7.17-0ubuntu0.16.04.2
 -- PHP Version: 7.0.17-2+deb.sury.org~xenial+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -30,8 +30,17 @@ CREATE TABLE `Partisipasi` (
   `id_pegawai` int(11) NOT NULL,
   `id_pelatihan` int(11) NOT NULL,
   `keterangan` text NOT NULL,
-  `nilai_pelatihan` int(11) NOT NULL
+  `nilai_pelatihan` int(11) NOT NULL DEFAULT '-1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Partisipasi`
+--
+
+INSERT INTO `Partisipasi` (`id_pegawai`, `id_pelatihan`, `keterangan`, `nilai_pelatihan`) VALUES
+(3, 1, 'Pelatihan untuk keamanan jaringan', -1),
+(3, 2, 'Pelatihan untuk sistem terdistribusi', -1),
+(3, 3, 'Pelatihan untuk enkripsi data', -1);
 
 -- --------------------------------------------------------
 
@@ -40,17 +49,27 @@ CREATE TABLE `Partisipasi` (
 --
 
 CREATE TABLE `Pegawai` (
-  `id_pegawai` int(11) NOT NULL,
-  `nama_pegawai` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `gaji_pegawai` int(11) NOT NULL DEFAULT '0',
   `jenis_kelamin` varchar(9) NOT NULL,
-  `jabatan` varchar(16) NOT NULL,
+  `jabatan` varchar(255) NOT NULL,
   `tanggal_masuk` date NOT NULL,
-  `email_pegawai` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `username_pegawai` varchar(255) NOT NULL,
-  `password_pegawai` varchar(16) NOT NULL,
-  `tanggal_lahir` date NOT NULL
+  `password` varchar(255) NOT NULL,
+  `tanggal_lahir` date NOT NULL,
+  `remember_token` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Pegawai`
+--
+
+INSERT INTO `Pegawai` (`id`, `name`, `gaji_pegawai`, `jenis_kelamin`, `jabatan`, `tanggal_masuk`, `email`, `username_pegawai`, `password`, `tanggal_lahir`, `remember_token`) VALUES
+(1, 'Ade Surya Ramadhani', 9000000, 'L', 'Web Developer', '2017-04-04', 'adesu@gmail.com', 'adesu', 'root', '1996-05-03', ''),
+(2, 'Gaudensius Dimas ', 9500000, 'L', 'IOS Developer', '2017-04-04', 'gauden@gmail.com', 'gauden', 'root', '1996-04-05', ''),
+(3, 'Anwar Ramadha', 10000000, 'L', 'Android Developer', '2017-04-04', 'anwar.ramadha@gmail.com', 'anwarramadha', '$2y$10$E0RFR2RnqB0Pfv6HKWDWsulzfgamxziyL/Ay/kXUaZZGhbkK.NrUi', '1996-01-22', 'uWEUDM8iXgpiCCUWJXwBfqMbxzBguMXNIeVVqy0vR912GdlVXSqG9wJEsEsw');
 
 -- --------------------------------------------------------
 
@@ -65,6 +84,15 @@ CREATE TABLE `Pelatihan` (
   `deskripsi_pelatihan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `Pelatihan`
+--
+
+INSERT INTO `Pelatihan` (`id_pelatihan`, `nama_trainer`, `waktu_pelaksanaan`, `deskripsi_pelatihan`) VALUES
+(1, 'Yudhistira Ansar', '2017-04-05', 'Pelatihan untuk keamanan jaringan'),
+(2, 'Awang Manaf', '2017-04-26', 'Pelatihan untuk sistem terdistribusi'),
+(3, 'Rinaldi Munir', '2017-04-27', 'Pelatihan untuk enkripsi data');
+
 -- --------------------------------------------------------
 
 --
@@ -74,9 +102,17 @@ CREATE TABLE `Pelatihan` (
 CREATE TABLE `Pengerjaan` (
   `id_pegawai` int(11) NOT NULL,
   `id_proyek` int(11) NOT NULL,
-  `peran` int(11) NOT NULL,
-  `keternagan_pengerjaan` int(11) NOT NULL
+  `peran` varchar(255) NOT NULL,
+  `keterangan_pengerjaan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Pengerjaan`
+--
+
+INSERT INTO `Pengerjaan` (`id_pegawai`, `id_proyek`, `peran`, `keterangan_pengerjaan`) VALUES
+(1, 1, 'Mobile Developer', 'blabla'),
+(1, 2, 'Quality Assurance', 'bla bla');
 
 -- --------------------------------------------------------
 
@@ -87,9 +123,17 @@ CREATE TABLE `Pengerjaan` (
 CREATE TABLE `Proyek` (
   `id_proyek` int(11) NOT NULL,
   `waktu_pengerjaan` date NOT NULL,
-  `deskripsi_proyek` date NOT NULL,
+  `deskripsi_proyek` text NOT NULL,
   `skala_proyek` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Proyek`
+--
+
+INSERT INTO `Proyek` (`id_proyek`, `waktu_pengerjaan`, `deskripsi_proyek`, `skala_proyek`) VALUES
+(1, '2017-04-03', 'mobile app project', 3),
+(2, '2017-04-17', 'web project', 1);
 
 --
 -- Indexes for dumped tables
@@ -99,9 +143,10 @@ CREATE TABLE `Proyek` (
 -- Indexes for table `Pegawai`
 --
 ALTER TABLE `Pegawai`
-  ADD PRIMARY KEY (`id_pegawai`),
-  ADD KEY `id_pegawai` (`id_pegawai`),
-  ADD KEY `id_pegawai_2` (`id_pegawai`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_pegawai` (`id`),
+  ADD KEY `id_pegawai_2` (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `Pelatihan`
@@ -125,17 +170,17 @@ ALTER TABLE `Proyek`
 -- AUTO_INCREMENT for table `Pegawai`
 --
 ALTER TABLE `Pegawai`
-  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `Pelatihan`
 --
 ALTER TABLE `Pelatihan`
-  MODIFY `id_pelatihan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pelatihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `Proyek`
 --
 ALTER TABLE `Proyek`
-  MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
