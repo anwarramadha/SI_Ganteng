@@ -32,7 +32,7 @@
 
     <!--  Light Bootstrap Table core CSS    -->
     {{HTML::style('css/light-bootstrap-dashboard.css')}}
-    
+
     <!-- CSS for action-bar-->
     {{HTML::style('css/action-bar.css')}}
 
@@ -48,8 +48,6 @@
         <div class="sidebar" data-color="purple" data-image="images/sidebar-5.jpg">
 
         <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
-
-
         	<div class="sidebar-wrapper">
                 <div class="logo">
 					<img src="images/people.png" style="width: 90%; height: 90%">
@@ -80,11 +78,11 @@
             <nav class="navbar navbar-default navbar-fixed">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        
+
                         <a class="navbar-brand" href="#">Employee List</a>
                     </div>
 
-                   
+
 
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -106,7 +104,7 @@
         </div>
 
         <div class="main-panel">
-            
+
             <div class="content">
                 <div class="container-fluid">
                     <div class="row" style="margin-bottom: 0px;">
@@ -114,7 +112,7 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title" style="width:20px; border-right:2px solid #666666; margin-right:5px;" >Employee List</h4>
-                                    
+
                                     <select class="no-border" id="department-selector">
                                         <option>Android Developer</option>
                                         <option>Web Developer</option>
@@ -123,7 +121,7 @@
                                 </div>
 
                                 <div class="content table-responsive table-full-width">
-                                	
+
                                     <table id="table-content" class="table table-hover table-striped display">
 
                                             <col width="25%">
@@ -138,8 +136,8 @@
                                             <ul id="action-bar-parent" class="action-bar clearfix">
                                                 <li>
                                                     <a>
-                                                        <span id="record-name"> &nbsp&nbsp Document</span>   
-                                                    </a> 
+                                                        <span id="record-name"> &nbsp&nbsp Document</span>
+                                                    </a>
                                                 </li>
 
                                                 <li>
@@ -167,7 +165,7 @@
 
                                         <tbody id="android-developer">
                                             @if (is_array($android_dev) || is_object($android_dev))
-                                                
+
                                                 @foreach($android_dev as $and_dev)
 
                                                     <tr>
@@ -184,7 +182,7 @@
                                                             @endforeach
                                                         @endif
 
-                                                        <?php if ($cnt != 0) $average = $sum / $cnt; 
+                                                        <?php if ($cnt != 0) $average = $sum / $cnt;
                                                                 else $average = 0;?>
 
                                                         <td>{{ $average }}</td>
@@ -207,8 +205,8 @@
 
                                         <tbody id="ios-developer">
                                             @if (is_array($IOS_dev) || is_object($IOS_dev))
-                                                
-                                                @foreach($IOS_dev as $i_dev) 
+
+                                                @foreach($IOS_dev as $i_dev)
                                                     <tr>
                                                         <td>{{ $i_dev -> name }}</td>
                                                         <td>{{ $i_dev -> tanggal_masuk }}</td>
@@ -221,9 +219,9 @@
                                                             @endforeach
                                                         @endif
 
-                                                        <?php if ($cnt != 0) $average = $sum / $cnt; 
+                                                        <?php if ($cnt != 0) $average = $sum / $cnt;
                                                                 else $average = 0;?>
-                                                        
+
                                                         <td>{{ $average }}</td>
 
                                                         <?php $project_count = 0; ?>
@@ -240,13 +238,13 @@
                                                     </tr>
                                                 @endforeach
                                             @endif
-                                            
+
                                         </tbody>
 
                                         <tbody id="web-developer">
                                             @if (is_array($web_dev) || is_object($web_dev))
-                                                
-                                                @foreach($web_dev as $w_dev) 
+
+                                                @foreach($web_dev as $w_dev)
                                                     <tr>
                                                         <td>{{ $w_dev -> name }}</td>
                                                         <td>{{ $w_dev -> tanggal_masuk }}</td>
@@ -259,11 +257,11 @@
                                                             @endforeach
                                                         @endif
 
-                                                        <?php if ($cnt != 0) $average = $sum / $cnt; 
+                                                        <?php if ($cnt != 0) $average = $sum / $cnt;
                                                                 else $average = 0;?>
 
                                                         <td>{{ $average }}</td>
-                                                        
+
                                                         <?php $project_count = 0; ?>
                                                         @if (is_array($employees_project_count) || is_object($employees_project_count))
                                                             @foreach($employees_project_count as $employee_project_count)
@@ -299,7 +297,7 @@
     <!-- <div class="additional-panel">
         <footer class="footer">
             <div class="container-fluid">
-                
+
                 <p class="copyright pull-right">
                     &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">Informatics</a>, made with love for a better web
                 </p>
@@ -321,7 +319,7 @@
                             <p>Pilih Pelatihan</p>
                             <div style="width: 100%; padding-bottom: 30px;">
 	                            <select class="no-border"  id="training-selector">
-	                                
+
 	                            </select>
 	                         </div>
 
@@ -371,8 +369,8 @@
                                 <thead>
                                     <th>Score</th>
                                     <th>Trainer</th>
-                                    <th>Date</th> 
-                                    <th>Description</th>         
+                                    <th>Date</th>
+                                    <th>Description</th>
                                 </thead>
                              </table>
                         </div>
@@ -386,8 +384,8 @@
                                 <thead>
                                     <th>Role</th>
                                     <th>Start Date</th>
-                                    <th>Description</th> 
-                                    <th>Scale</th>         
+                                    <th>Description</th>
+                                    <th>Scale</th>
                                 </thead>
                              </table>
                         </div>
@@ -422,7 +420,7 @@
     {{HTML::script('js/jquery.dataTables.min.js')}}
 
     <!--this script is use to handle event click in table -->
-    
+
 
     <script type="text/javascript">
         var tbl = document.getElementById("table-content");
@@ -448,12 +446,12 @@
                 //show table header and remove action bar
                 if (ident.value != -1) {
                     showTableHead();
-                    document.getElementById("table-checked-identifier").value = -1; 
+                    document.getElementById("table-checked-identifier").value = -1;
                 }
             }
-            
+
         });
-    	
+
 
         function tableOnclick(eventVal) {
             for (var i = 0; i < tbl.rows.length; i++) {
@@ -463,7 +461,7 @@
                             getval(tbl.rows[i].cells[0], tbl.rows[i], tbl.rows[i].cells[4]);
                         }
                     }
-                    else 
+                    else
                         tbl.rows[i].onclick = function () { getval(this.cells[0], this, this.cells[4]); };
                  }
             }
@@ -485,7 +483,7 @@
             //show the action bar
             $('#table-click-event').show();
 
-            //show the record name to action bar 
+            //show the record name to action bar
             document.getElementById("record-name").innerHTML = cel.innerHTML;
 
             //get old index value of table to remove color
@@ -496,7 +494,7 @@
             $('#id-pegawai').val(id_pegawai.innerHTML);
 
             if (oldIdentifierValue != -1)
-                tbl.rows[oldIdentifierValue].removeAttribute("style"); //remove row table color where not selected again 
+                tbl.rows[oldIdentifierValue].removeAttribute("style"); //remove row table color where not selected again
 
             //give color to selected row
             rowSelected.style.backgroundColor = "#baedef";
@@ -507,7 +505,7 @@
         $(document).ready(function() {
             $('#edit-record').hide();
             $('#show-more-detail').hide();
-        });    
+        });
     </script>
 
     <script type="text/javascript">
@@ -517,33 +515,33 @@
             As html will be 'everything', we will use then an stopPropagation event.
             */
             $('html, .close').click(function(e){
-                if (e.target.tagName != 'SELECT' && e.target.tagName != 'TD' && e.target.tagName != 'OPTION' && e.target.tagName != 'INPUT') { 
+                if (e.target.tagName != 'SELECT' && e.target.tagName != 'TD' && e.target.tagName != 'OPTION' && e.target.tagName != 'INPUT') {
                     $('.selection').hide();
                     $('#edit-record').hide();
                     $('#show-more-detail').hide();
-                    $("body").css("overflow", "visible");   
+                    $("body").css("overflow", "visible");
                 }
             });
 
             /*
-            Here we use the stopPropagation event in order to prevent hidding the 
-            floating window when we click anywhere inside the #mainFloat element. 
+            Here we use the stopPropagation event in order to prevent hidding the
+            floating window when we click anywhere inside the #mainFloat element.
             */
             $("#mainFloat").click(function(event){
                 event.stopPropagation();
             });
 
             /*
-            Adding the option to hide the windows by pressing the 'escape' (ESC) 
+            Adding the option to hide the windows by pressing the 'escape' (ESC)
             key with the keyboard.
             */
             $(document).keyup(function(e) {
                 if (e.keyCode == 27) {
                     $('#edit-record').hide();
-                    $('#show-more-detail').hide(); 
+                    $('#show-more-detail').hide();
                     $("body").css("overflow", "auto");
                 }
-            }); 
+            });
 
             /*
             Clicking over the .floatMenu selector, we will show the floating window.
@@ -552,11 +550,11 @@
                 // Showing the floating window
                 // $('#darkOverlay').show();
 
-                // // Hidding the background page scroll 
+                // // Hidding the background page scroll
                 // $("body").css("overflow", "hidden");
 
                 //  In order to prevent hidding the floating window, as we are on the 'html' element.
-                // We have to stop the click event propagation so it won't reach 'html' 
+                // We have to stop the click event propagation so it won't reach 'html'
                 // event.stopPropagation();
                 alert("a");
             });
@@ -570,15 +568,15 @@
             $("#table-click-event").on("click", "a.edit-button:eq(0)", function () {
                 $('#edit-record').show();
 
-                // Hidding the background page scroll 
+                // Hidding the background page scroll
                 $("body").css("overflow", "hidden");
 
                 //  In order to prevent hidding the floating window, as we are on the 'html' element.
-                // We have to stop the click event propagation so it won't reach 'html' 
+                // We have to stop the click event propagation so it won't reach 'html'
                 event.stopPropagation();
             });
         });
-        
+
     </script>
 
     <!--show more detail-->
@@ -587,15 +585,15 @@
             $("#table-click-event").on("click", "a.detail-button:eq(0)", function () {
                 $('#show-more-detail').show();
 
-                // Hidding the background page scroll 
+                // Hidding the background page scroll
                 $("body").css("overflow", "hidden");
 
                 //  In order to prevent hidding the floating window, as we are on the 'html' element.
-                // We have to stop the click event propagation so it won't reach 'html' 
+                // We have to stop the click event propagation so it won't reach 'html'
                 event.stopPropagation();
             });
         });
-        
+
     </script>
 
     <script type="text/javascript">
@@ -616,7 +614,7 @@
                 }, 0);
             });
         });
-            
+
     </script>
 
     <script type="text/javascript">
@@ -717,12 +715,12 @@
 
                             switch(value.skala_proyek) {
                                 case 1 :
-                                    tr.append($('<td></td>').html('Easy'));      
+                                    tr.append($('<td></td>').html('Easy'));
                                     break;
-                                case 2 : 
-                                    tr.append($('<td></td>').html('Intermediate')); 
+                                case 2 :
+                                    tr.append($('<td></td>').html('Intermediate'));
                                     break;
-                                case 3 : 
+                                case 3 :
                                     tr.append($('<td></td>').html('Hard'));
                                     break;
                             }
@@ -753,10 +751,10 @@
 	                    if (variable == 'employeeBioData') {
 	                        $.each(values, function(key, value) {
 	                            $('#employee-name-edit').html(value.name);
-	                        });    
+	                        });
 	                    }
 	                    else if (variable == 'listPelatihan') {
-	                        if ($('#training-selector').has('option')) 
+	                        if ($('#training-selector').has('option'))
 	                            $('option').remove('.training-option');
 
 	                        $.each(values, function(key, value) {

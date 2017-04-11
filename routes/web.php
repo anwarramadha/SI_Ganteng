@@ -27,3 +27,5 @@ Route::get('getemployeedata/{id}', 'EmployeeList@getEmployeeData');
 Route::post('updateemployeescore', 'EmployeeList@updateEmployeeScore');
 
 Route::get('schedule', 'EmployeeList@showSchedule');
+
+Route::get('profil','EmployeeProfil@getDataEmployee');
