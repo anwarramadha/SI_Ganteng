@@ -7,6 +7,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Input;
 
 class EmployeeList extends BaseController
 {
@@ -89,13 +90,22 @@ class EmployeeList extends BaseController
     }
 
     public function updateEmployeeScore() {
-    	$id_pegawai = $request->id_pegawai;
-    	$id_pelatihan = $request->id_pelatihan;
-    	$score = $request->score;
+    	$id_pegawai = Input::get('id_pegawai');
+    	$id_pelatihan = Input::get('id_pelatihan');
+    	$score = Input::get('score');
 
-    	DB::table('partisipasi')
-    		->whereColumn(['id_pegawai', '=',$id_pegawai],
-    						['id_pelatihan','=', $id_pelatihan])
-    		->update('nilai_pelatihan', $score);
+    	DB::table('Partisipasi')
+    		->where([
+                        ['id_pegawai', '=',$id_pegawai],
+    					['id_pelatihan','=', $id_pelatihan]
+                        ])
+    		->update(array('nilai_pelatihan' => $score));
+
+        return redirect('employees');
+    }
+
+    public function showSchedule() {
+        return view('schedule', ['pelatihan' => 
+                                    DB::table('Pelatihan')->get()]);
     }
 }

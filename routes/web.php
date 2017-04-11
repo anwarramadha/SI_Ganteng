@@ -23,3 +23,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::get('getemployeedata/{id}', 'EmployeeList@getEmployeeData');
+
+Route::post('updateemployeescore', 'EmployeeList@updateEmployeeScore');
+
+Route::get('schedule', 'EmployeeList@showSchedule');

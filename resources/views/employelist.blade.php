@@ -59,17 +59,18 @@
                 </div>
 
                 <ul class="nav">
-                    <li>
-                        <a href="dashboard.html">
-                            <i class="pe-7s-graph"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
                     <li class="active">
-                        <a href="table.html">
+                        <a href={{ URL::to('/employees') }}>
                             <i class="pe-7s-note2"></i>
                             <p>Employee List</p>
                         </a>
+                    </li>
+
+                    <li>
+                    	<a href={{ URL::to('/schedule') }}>
+                    		<i class="pe-7s-alarm"></i>
+                    		<p>Training Schedule</p>
+                    	</a>
                     </li>
                 </ul>
         	</div>
@@ -88,10 +89,6 @@
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li>
-                               <a href="">
-                                    <i class="fa fa-search"></i>
-                                    <p class="hidden-lg hidden-md">Search</p>
-                                </a>
                             </li>
                         </ul>
 
@@ -319,20 +316,29 @@
                 <div id="edit-record-mainFloat">
                     <h2 style=" margin-left: 30px;" id="employee-name-edit"></h2>
 
-                    <form id="edit-record-field" method="POST">
-                        <div class="select-training">
+                    {{ Form::open(array('action' => 'EmployeeList@updateEmployeeScore', 'method' => 'POST'))}}
+                        <div class="select-training" id="select-training">
                             <p>Pilih Pelatihan</p>
-                            <select class="no-border" id="training-selector">
-                                
-                            </select>
+                            <div style="width: 100%; padding-bottom: 30px;">
+	                            <select class="no-border"  id="training-selector">
+	                                
+	                            </select>
+	                         </div>
+
+                            <div class="form-group col-xs-2">
+                            	<label for="input-nilai">Score</label>
+                            	{{ FORM :: input('text', 'score', null, ['class' => 'form-control', 'id' => 'input-nilai'])}}
+                            </div>
+
+                            {{ FORM :: hidden('id_pegawai', null, ['id' => 'edit-score-id-pegawai'])}}
+                            {{ FORM :: hidden('id_pelatihan', null, ['id' => 'edit-score-id-pelatihan']) }}
                         </div>
-                        <input id="employee-id" type="hidden">
-                        <input id="employee-score" type="hidden">
-                    </form>
-                    <div style="position: absolute; bottom: 10px; width: 100%; text-align: right; padding-right: 20px">
-                        <button class="btn btn-primary btn-fill" >OK</button>
-                        <button class="btn btn-default">CANCEL</button>
-                    </div>
+
+	                    <div style="position: absolute; bottom: 10px; width: 100%; text-align: right; padding-right: 20px">
+	                        <!-- <button class="btn btn-primary btn-fill" >OK</button>	 -->
+	                        {{ FORM::submit('OK', array('class' => 'btn btn-primary btn-fill')) }}
+	                    </div>
+                    {{ Form::close() }}
                 </div>
 
             </div>
@@ -511,7 +517,7 @@
             As html will be 'everything', we will use then an stopPropagation event.
             */
             $('html, .close').click(function(e){
-                if (e.target.tagName != 'SELECT' && e.target.tagName != 'TD' && e.target.tagName != 'OPTION') { 
+                if (e.target.tagName != 'SELECT' && e.target.tagName != 'TD' && e.target.tagName != 'OPTION' && e.target.tagName != 'INPUT') { 
                     $('.selection').hide();
                     $('#edit-record').hide();
                     $('#show-more-detail').hide();
@@ -732,41 +738,61 @@
 
     <script type="text/javascript">
         var url = {!!json_encode(url('/'))!!}
+
+        var scores = [];
+
         $('.edit-button').click(function() {
             var id_pegawai = $('#id-pegawai').val();
             $('#employee-id').val(id_pegawai);
-            $.get(url + '/getemployeedata/' + id_pegawai, function(data){
-                $.each(data, function(variable, values) {
-                    if (variable == 'employeeBioData') {
-                        $.each(values, function(key, value) {
-                            $('#employee-name-edit').html(value.name);
-                        });    
-                    }
-                    else if (variable == 'listPelatihan') {
-                        if ($('#training-selector').has('option')) 
-                            $('option').remove('.training-option');
-                        $.each(values, function(key, value) {
-                            var select = $('<option></option>').html(value.nama_trainer+" -\n "+value.deskripsi_pelatihan);
-                            var input = $('<input>');
+            $.ajax({
+            	async 	: false,
+            	type	: 'GET',
+            	url 	: url + '/getemployeedata/' + id_pegawai,
+            	success	: function (data) {
+            		$.each(data, function(variable, values) {
+	                    if (variable == 'employeeBioData') {
+	                        $.each(values, function(key, value) {
+	                            $('#employee-name-edit').html(value.name);
+	                        });    
+	                    }
+	                    else if (variable == 'listPelatihan') {
+	                        if ($('#training-selector').has('option')) 
+	                            $('option').remove('.training-option');
 
-                            input.attr("type", "text");
-                            input.attr("id", value.id_pelatihan);
-                            select.addClass('training-option');
-                            select.addClass(value.nilai_pelatihan);
-                            select.append(input);
-                            $('#training-selector').append(select);
-                        });
-                    }
-                });
+	                        $.each(values, function(key, value) {
+	                            var select = $('<option></option>').html(value.nama_trainer+" -\n "+value.deskripsi_pelatihan)
+
+	                            select.attr("value", value.id_pelatihan);
+	                            select.addClass('training-option');
+	                            $('#training-selector').append(select);
+
+	                            var score = {id_pelatihan : value.id_pelatihan, score : value.nilai_pelatihan};
+	                            scores.push(score);
+	                        });
+	                    }
+	                });
+            	}
             });
 
+            $('#input-nilai').val(scores[0].score);
+            $('#edit-score-id-pegawai').val(id_pegawai);
+            $('#edit-score-id-pelatihan').val(scores[0].id_pelatihan);
         });
-    </script>
 
-    <script type="text/javascript">
+        $('#training-selector').on("select", function () {
+        	console.log("h");
+        });
+
         $('#training-selector').change(function(e) {
-            $('#1').val("hahaha");
-            console.log(e.target);
+        	var id_pelatihan = $('#training-selector').val();
+            for (i = 0; i < scores.length; i++) {
+            	if (scores[i].id_pelatihan == id_pelatihan) {
+            	// console.log(scores[i].score);
+            		$('#input-nilai').val(scores[i].score);
+            		$('#edit-score-id-pelatihan').val(scores[i].id_pelatihan);
+            		break;
+            	}
+            }
         });
     </script>
 </html>
