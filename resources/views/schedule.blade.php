@@ -52,28 +52,28 @@
 
         	<div class="sidebar-wrapper">
                 <div class="logo">
-					<img src="images/people.png" style="width: 90%; height: 90%">
+                    <img src="images/people.png" style="width: 90%; height: 90%">
                     <a class="simple-text">
                         Personalia
                     </a>
                 </div>
 
                 <ul class="nav">
-                    <li class="active">
-                        <a href={{ URL::to('/employees') }}>
+                    <li>
+                        <a href={{URL::to('/employees')}}>
                             <i class="pe-7s-note2"></i>
                             <p>Employee List</p>
                         </a>
                     </li>
 
-                    <li>
-                    	<a href={{ URL::to('/schedule') }}>
-                    		<i class="pe-7s-alarm"></i>
-                    		<p>Training Schedule</p>
-                    	</a>
+                    <li class="active">
+                        <a href={{URL::to('/schedule')}}>
+                            <i class="pe-7s-alarm"></i>
+                            <p>Training Schedule</p>
+                        </a>
                     </li>
                 </ul>
-        	</div>
+            </div>
         </div>
 
         <div class="additional-panel">
@@ -89,6 +89,10 @@
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li>
+                               <a href="">
+                                    <i class="fa fa-search"></i>
+                                    <p class="hidden-lg hidden-md">Search</p>
+                                </a>
                             </li>
                         </ul>
 
@@ -159,126 +163,13 @@
 
 
                                         <thead id="table-head">
-                                            <th>Name</th>
-                                            <th>Date Enter</th>
-                                            <th>Average</th>
-                                            <th>Project Count</th>
+                                            <th>Number</th>
+                                            <th>Trainer</th>
+                                            <th>Date</th>
+                                            <th>Description</th>
                                          </thead>
 
-                                        <tbody id="android-developer">
-                                            @if (is_array($android_dev) || is_object($android_dev))
-                                                
-                                                @foreach($android_dev as $and_dev)
-
-                                                    <tr>
-                                                        <td>{{ $and_dev -> name }}</td>
-                                                        <td>{{ $and_dev -> tanggal_masuk }}</td>
-                                                        <?php $sum = 0; $cnt = 0;?>
-                                                        @if (is_array($employees_score) || is_object($employees_score))
-                                                            @foreach ($employees_score as $employee_score)
-                                                                @if ($employee_score -> id == $and_dev -> id)
-                                                                    @if ($employee_score -> nilai_pelatihan != -1)
-                                                                        <?php $sum += $employee_score -> nilai_pelatihan; $cnt++; ?>
-                                                                    @endif
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-
-                                                        <?php if ($cnt != 0) $average = $sum / $cnt; 
-                                                                else $average = 0;?>
-
-                                                        <td>{{ $average }}</td>
-
-                                                        <?php $project_count = 0; ?>
-                                                        @if (is_array($employees_project_count) || is_object($employees_project_count))
-                                                            @foreach($employees_project_count as $employee_project_count)
-                                                                @if ($employee_project_count -> id_pegawai == $and_dev -> id)
-                                                                    <?php $project_count ++; ?>
-
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-                                                        <td>{{ $project_count }}</td>
-                                                        <td style="display : none;">{{ $and_dev -> id }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-                                        </tbody>
-
-                                        <tbody id="ios-developer">
-                                            @if (is_array($IOS_dev) || is_object($IOS_dev))
-                                                
-                                                @foreach($IOS_dev as $i_dev) 
-                                                    <tr>
-                                                        <td>{{ $i_dev -> name }}</td>
-                                                        <td>{{ $i_dev -> tanggal_masuk }}</td>
-                                                        <?php $sum = 0; $cnt = 0;?>
-                                                        @if (is_array($employees_score) || is_object($employees_score))
-                                                            @foreach ($employees_score as $employee_score)
-                                                                @if ($employee_score -> id == $i_dev -> id)
-                                                                    <?php $sum += $employee_score -> nilai_pelatihan; $cnt++;?>
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-
-                                                        <?php if ($cnt != 0) $average = $sum / $cnt; 
-                                                                else $average = 0;?>
-                                                        
-                                                        <td>{{ $average }}</td>
-
-                                                        <?php $project_count = 0; ?>
-                                                        @if (is_array($employees_project_count) || is_object($employees_project_count))
-                                                            @foreach($employees_project_count as $employee_project_count)
-                                                                @if ($employee_project_count -> id_pegawai == $i_dev -> id)
-                                                                    <?php $project_count++; ?>
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-
-                                                        <td>{{ $project_count }}</td>
-                                                        <td style="display: none;">{{ $i_dev -> id }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-                                            
-                                        </tbody>
-
-                                        <tbody id="web-developer">
-                                            @if (is_array($web_dev) || is_object($web_dev))
-                                                
-                                                @foreach($web_dev as $w_dev) 
-                                                    <tr>
-                                                        <td>{{ $w_dev -> name }}</td>
-                                                        <td>{{ $w_dev -> tanggal_masuk }}</td>
-                                                        <?php $sum = 0; $cnt = 0;?>
-                                                        @if (is_array($employees_score) || is_object($employees_score))
-                                                            @foreach ($employees_score as $employee_score)
-                                                                @if ($employee_score -> id == $w_dev -> id)
-                                                                    <?php $sum += $employee_score -> nilai_pelatihan; $cnt++;?>
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-
-                                                        <?php if ($cnt != 0) $average = $sum / $cnt; 
-                                                                else $average = 0;?>
-
-                                                        <td>{{ $average }}</td>
-                                                        
-                                                        <?php $project_count = 0; ?>
-                                                        @if (is_array($employees_project_count) || is_object($employees_project_count))
-                                                            @foreach($employees_project_count as $employee_project_count)
-                                                                @if ($employee_project_count -> id_pegawai == $w_dev -> id)
-                                                                    <?php $project_count++; ?>
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-
-                                                        <td>{{ $project_count }}</td>
-                                                        <td style="display: none;">{{ $w_dev -> id }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-                                        </tbody>
+                                        
 
                                         <input id="table-checked-identifier" type="hidden" value="-1">
                                         <input id="id-pegawai" type="hidden">

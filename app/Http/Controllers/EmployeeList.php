@@ -103,4 +103,9 @@ class EmployeeList extends BaseController
 
         return redirect('employees');
     }
+
+    public function showSchedule() {
+        return view('schedule', ['pelatihan' => 
+                                    DB::table('Pelatihan')->get()]);
+    }
 }
