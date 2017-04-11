@@ -42,6 +42,9 @@
     <!-- Datatable style -->
     {{HTML::style('css/jquery.dataTables.min.css')}}
 
+    <!-- Heading style -->
+    {{HTML::style('css/heading.css')}}
+
 </head>
 <body>
     <div class="wrapper">
@@ -57,12 +60,14 @@
                         Personalia
                     </a>
                 </div>
-
+                <div class="user-font">
+                  adesu
+                </div>
                 <ul class="nav">
                     <li>
-                        <a href={{URL::to('/employees')}}>
-                            <i class="pe-7s-note2"></i>
-                            <p>Employee List</p>
+                        <a href={{URL::to('/profil')}}>
+                            <i class="pe-7s-user"></i>
+                            <p>your profile</p>
                         </a>
                     </li>
 

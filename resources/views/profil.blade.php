@@ -48,126 +48,194 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="sidebar" data-color="purple" data-image="images/sidebar-5.jpg">
-          <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
-      	  <div class="sidebar-wrapper">
-              <div class="logo">
-                  <img src="images/people.png" style="width: 90%; height: 90%">
-                  <a class="simple-text">
-                      Personalia
-                  </a>
-              </div>
-              <ul class="nav">
-                  <li class="active">
-                      <a href="#">
-                          <i class=""></i>
-                          <p>Your Profile</p>
-                      </a>
-                  </li>
+  <div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="images/sidebar-5.jpg">
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <img src="images/people.png" style="width: 90%; height: 90%">
+            <a class="simple-text">
+              Personalia
+            </a>
+        </div>
+        @foreach ($employeeBioData as $employee):
+        <div class="user-font">
+          {{$employee -> username_pegawai}}
+        </div>
+        @endforeach
+        <ul class="nav">
+          <li class="active">
+            <a href={{URL::to('/profil')}}>
+              <i class="pe-7s-user"></i>
+              <p>Your Profile</p>
+            </a>
+          </li>
+          <li>
+            <a href={{URL::to('/profilschedule')}}>
+              <i class="pe-7s-alarm"></i>
+              <p>Training Schedule</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-                  <li>
-                    <a href="#">
-                      <i class=""></i>
-                      <p>Training Schedule</p>
-                    </a>
-                  </li>
-              </ul>
+    <div class="additional-panel">
+      <nav class="navbar navbar-default navbar-fixed">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Employee Profil</a>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left"></ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="#"><p>Log out</p></a>
+              </li>
+              <li class="separator hidden-lg hidden-md"></li>
+            </ul>
           </div>
         </div>
+      </nav>
+    </div>
 
-        <div class="additional-panel">
-            <nav class="navbar navbar-default navbar-fixed">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">Profil Employee</a>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-left">
-                        </ul>
+    <div class="main-panel">
+      <div class="container-fluid">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1 class="panel-title"> Employee Information </h1>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              @foreach ($employeeBioData as $employeeData):
+              @if ($employeeData -> jenis_kelamin === "L")
+                <php $image ="images/male.png"; ?>
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="images/male.png" class="img-circle img-responsive"> </div>
+              @else
+                <php $image ="images/female.png"; ?>
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="images/female.png" class="img-circle img-responsive"> </div>
+              @endif
+              @endforeach
 
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="#">
-                                    <p>Log out</p>
-                                </a>
-                            </li>
-                            <li class="separator hidden-lg hidden-md"></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-
-        <div class="main-panel">
-
-
-                <div class="container-fluid">
-                  <!-- taro profil pegawai disini -->
-
-
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h1 class="panel-title"> Informasi Pegawai </h1>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="" class="img-circle img-responsive"> </div>
-
-                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
-                  <dl>
-                    <dt>DEPARTMENT:</dt>
-                    <dd>Administrator</dd>
-                    <dt>HIRE DATE</dt>
-                    <dd>11/12/2013</dd>
-                    <dt>DATE OF BIRTH</dt>
-                       <dd>11/12/2013</dd>
-                    <dt>GENDER</dt>
-                    <dd>Male</dd>
-                  </dl>
-                </div>-->
                 <div class=" col-md-9 col-lg-9 ">
                   <table class="table table-user-information">
                     <tbody>
+                      @foreach ($employeeBioData as $employeeData):
                       <tr>
-                        <td>Nama:</td>
-                        <td>Ade Surya Ramadhani</td>
+                        <td>Name:</td>
+                        <td> {{ $employeeData -> name }} <td>
                       </tr>
                       <tr>
                         <td>Username:</td>
-                        <td>adesu</td>
+                        <td>{{ $employeeData -> username_pegawai }}</td>
                       </tr>
                       <tr>
-                        <td>Posisi:</td>
-                        <td>Web Developer</td>
+                        <td>Dapartement:</td>
+                        <td>{{ $employeeData -> jabatan }}</td>
                       </tr>
                       <tr>
-                        <td>tanggal bergabung:</td>
-                        <td>06/23/2013</td>
+                        <td>Date Enter:</td>
+                        <td>{{ $employeeData -> tanggal_masuk }}</td>
                       </tr>
                       <tr>
-                        <td>Tanggal Lahir</td>
-                        <td>01/24/1988</td>
+                        <td>Birthday:</td>
+                        <td>{{ $employeeData -> tanggal_lahir }}</td>
                       </tr>
                       <tr>
-                        <td>Jenis Kelamin</td>
-                        <td>Laki-laki</td>
+                        <td>Gender:</td>
+                        @if ($employeeData -> jenis_kelamin === "L")
+                          <td>Laki - laki</td>
+                        @else
+                          <td>Perempuan</td>
+                        @endif
                       </tr>
                       <tr>
-                        <td>Email</td>
-                        <td><a href="#">info@support.com</a></td>
+                        <td>Email:</td>
+                        <td><a href="#">{{ $employeeData -> email }}</a></td>
                       </tr>
-
+                      <tr>
+                        <td>Salary(Rp)</td>
+                        <td>{{ $employeeData -> gaji_pegawai }}</td>
+                      </tr>
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
-
                 <!-- tambahin table score pegawai -->
-
               </div>
             </div>
           </div>
+         <div class="panel panel-default">
+           <div class="panel-heading">
+             <h1 class="panel-title"> Training Score</h1>
+           </div>
+           <div class="content table-responsive">
+             <table id="training-table" class="table table-hover table-striped">
+               <col width="10%">
+               <col width="10%">
+               <col width="20%">
+               <col width="20%">
+               <col width="40%">
+               <thead>
+                   <th>No</th>
+                   <th>Score</th>
+                   <th>Trainer</th>
+                   <th>Date</th>
+                   <th>Description</th>
+               </thead>
+               <tbody>
+                   <?php $i = 1; ?>
+                   @foreach($listPelatihan as $latihan)
+                       <tr>
+                           <td>{{ $i }}</td>
+                           <td>{{ $latihan->nilai_pelatihan}}</td>
+                           <td>{{ $latihan->nama_trainer }}</td>
+                           <td>{{ $latihan->waktu_pelaksanaan }}</td>
+                           <td>{{ $latihan->deskripsi_pelatihan }}</td>
+                       </tr>
+                       <?php $i++; ?>
+                   @endforeach
+               </tbody>
+              </table>
+            </div>
+          </div>
+         <div class="panel panel-default">
+             <div class="panel-heading">
+               <h1 class="panel-title"> Project List</h1>
+             </div>
+             <div class="content table-responsive">
+                  <table id="project-table" class="table table-hover table-striped">
+                     <col width="10%">
+                     <col width="20%">
+                     <col width="20%">
+                     <col width="40%">
+                     <col width="10%">
+                     <thead>
+                         <th>No</th>
+                         <th>Role</th>
+                         <th>Start Date</th>
+                         <th>Description</th>
+                         <th>Scale</th>
+                     </thead>
+                     <tbody>
+                       <?php $i = 1; ?>
+                       @foreach($listProyek as $pengerjaan)
+                       <tr>
+                           <td>{{ $i }}</td>
+                           <td>{{ $pengerjaan->peran}}</td>
+                           <td>{{ $pengerjaan->waktu_pengerjaan}}</td>
+                           <td>{{ $pengerjaan->deskripsi_proyek}}</td>
+                           <td>{{ $pengerjaan->skala_proyek}}</td>
+                       </tr>
+                       <?php $i++;?>
+                       @endforeach
+                     </tbody>
+                  </table>
+             </div>
          </div>
+       </div>
+         </div>
+
         </div>
     </div>
 </body>

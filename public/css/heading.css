@@ -1,3 +1,11 @@
 .panel-info > .panel-heading {
   background-color: #ffffff;
 }
+
+.user-font{
+  color: #5a7391;
+ font-size: 16px;
+ text-align: center;
+ font-weight: 600;
+ margin-bottom: 7px;
+}

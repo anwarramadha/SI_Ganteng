@@ -7,7 +7,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Input;
 
 class EmployeeList extends BaseController
 {
@@ -20,7 +19,7 @@ class EmployeeList extends BaseController
     public function getEmployeesData() {
 
     	$employees = DB::table('Pegawai')
-    								-> select('Pegawai.id', 'name', 'gaji_pegawai', 
+    								-> select('Pegawai.id', 'name', 'gaji_pegawai',
     								'jenis_kelamin', 'jabatan', 'tanggal_masuk', 'email', 'tanggal_lahir')->get();
 
     	$android_employees = array();
@@ -90,22 +89,18 @@ class EmployeeList extends BaseController
     }
 
     public function updateEmployeeScore() {
-    	$id_pegawai = Input::get('id_pegawai');
-    	$id_pelatihan = Input::get('id_pelatihan');
-    	$score = Input::get('score');
+    	$id_pegawai = $request->id_pegawai;
+    	$id_pelatihan = $request->id_pelatihan;
+    	$score = $request->score;
 
-    	DB::table('Partisipasi')
-    		->where([
-                        ['id_pegawai', '=',$id_pegawai],
-    					['id_pelatihan','=', $id_pelatihan]
-                        ])
-    		->update(array('nilai_pelatihan' => $score));
-
-        return redirect('employees');
+    	DB::table('partisipasi')
+    		->whereColumn(['id_pegawai', '=',$id_pegawai],
+    						['id_pelatihan','=', $id_pelatihan])
+    		->update('nilai_pelatihan', $score);
     }
 
-    public function showSchedule() {
-        return view('schedule', ['pelatihan' => 
-                                    DB::table('Pelatihan')->get()]);
-    }
+		public function showSchedule(){
+			return view('schedule', ['pelatihan' =>
+																	DB::table('Pelatihan')->get()]);
+		}
 }
