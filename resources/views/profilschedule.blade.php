@@ -10,7 +10,6 @@
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-
     <!-- Bootstrap core CSS     -->
     {{Html::style('css/bootstrap.min.css')}}
 
@@ -60,9 +59,6 @@
                         Personalia
                     </a>
                 </div>
-                <div class="user-font">
-                  adesu
-                </div>
                 <ul class="nav">
                     <li>
                         <a href={{URL::to('/profil')}}>
@@ -97,9 +93,13 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#">
-                                    <p>Log out</p>
+                                <a href="{{ route('logout') }}"onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    <p>{{ Auth::user()->name }}</p>
                                 </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
                             </li>
                             <li class="separator hidden-lg hidden-md"></li>
                         </ul>

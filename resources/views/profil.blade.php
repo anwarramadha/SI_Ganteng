@@ -58,11 +58,6 @@
               Personalia
             </a>
         </div>
-        @foreach ($employeeBioData as $employee):
-        <div class="user-font">
-          {{$employee -> username_pegawai}}
-        </div>
-        @endforeach
         <ul class="nav">
           <li class="active">
             <a href={{URL::to('/profil')}}>
@@ -90,7 +85,13 @@
             <ul class="nav navbar-nav navbar-left"></ul>
             <ul class="nav navbar-nav navbar-right">
               <li>
-                <a href="#"><p>Log out</p></a>
+                <a href="{{ route('logout') }}"onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                    <p>{{ Auth::user()->name }}</p>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
               </li>
               <li class="separator hidden-lg hidden-md"></li>
             </ul>

@@ -67,7 +67,7 @@
                     </li>
 
                     <li class="active">
-                        <a href={{URL::to('/profilschedule')}}>
+                        <a href={{URL::to('/schedule')}}>
                             <i class="pe-7s-alarm"></i>
                             <p>Training Schedule</p>
                         </a>
@@ -80,11 +80,8 @@
             <nav class="navbar navbar-default navbar-fixed">
                 <div class="container-fluid">
                     <div class="navbar-header">
-
                         <a class="navbar-brand" href="#">Training Schedule</a>
                     </div>
-
-
 
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -92,9 +89,13 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#">
-                                    <p>Log out</p>
+                                <a href="{{ route('logout') }}"onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                 	<p>{{ Auth::user()->name }}</p>
                                 </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
                             <li class="separator hidden-lg hidden-md"></li>
                         </ul>
@@ -104,7 +105,6 @@
         </div>
 
         <div class="main-panel">
-
             <div class="content">
                 <div class="container-fluid">
                     <div class="row" style="margin-bottom: 0px;">
@@ -112,11 +112,12 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">Training Schedule</h4>
-
                                 </div>
 
                                 <div class="content table-responsive table-full-width">
+                                </div>
 
+                                <div class="content table-responsive table-full-width">
                                     <table id="table-content" class="table table-hover table-striped display">
 
                                         <!-- <p id="sub-header" style="margin-bottom: 35px;"></p> -->
@@ -125,8 +126,8 @@
                                             <ul id="action-bar-parent" class="action-bar clearfix">
                                                 <li>
                                                     <a>
-                                                        <span id="record-name"> &nbsp&nbsp Document</span>
-                                                    </a>
+                                                        <span id="record-name"> &nbsp&nbsp Document</span>   
+                                                    </a> 
                                                 </li>
 
                                                 <li>
@@ -154,7 +155,7 @@
 
                                         <tbody>
                                             <?php $i = 1; ?>
-                                            @foreach($pelatihan as $latihan)
+                                            @foreach($pelatihan as $latihan) 
                                                 <tr>
                                                     <td>{{ $i }}</td>
                                                     <td>{{ $latihan->nama_trainer }}</td>
