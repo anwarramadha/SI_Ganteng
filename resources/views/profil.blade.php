@@ -108,7 +108,7 @@
           </div>
           <div class="panel panel-body">
             <div class="row">
-              @foreach ($employeeBioData as $employeeData):
+              @foreach ($employeeBioData as $employeeData)
               @if ($employeeData -> jenis_kelamin === "L")
                 <php $image ="images/male.png"; ?>
                 <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="images/male.png" class="img-circle img-responsive"> </div>
@@ -121,7 +121,7 @@
                 <div class=" col-md-9 col-lg-9 ">
                   <table class="table table-user-information">
                     <tbody>
-                      @foreach ($employeeBioData as $employeeData):
+                      @foreach ($employeeBioData as $employeeData)
                       <tr>
                         <td>Name:</td>
                         <td> {{ $employeeData -> name }} <td>
