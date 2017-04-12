@@ -31,3 +31,7 @@ Route::get('schedule', 'EmployeeList@showSchedule');
 Route::get('profil','EmployeeProfil@getDataEmployee');
 
 Route::get('profilschedule','EmployeeProfil@schedule');
+
+Route::get('addtrainingpage','EmployeeList@addtrainingpage');
+
+Route::post('actionadd','EmployeeList@addtraining');

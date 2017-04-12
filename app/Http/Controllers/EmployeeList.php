@@ -26,7 +26,7 @@ class EmployeeList extends BaseController
                 $employees = DB::table('Pegawai')
                             -> select('Pegawai.id', 'name', 'gaji_pegawai',
                             'jenis_kelamin', 'jabatan', 'tanggal_masuk', 'email', 'tanggal_lahir')->get();
-            
+
                 $android_employees = array();
 
                 $ios_employees = array();
@@ -109,10 +109,21 @@ class EmployeeList extends BaseController
     		->update('nilai_pelatihan', $score);
     }
 
+
+
+		public function addtrainingpage(){
+			return view('training');
+		}
+
+		public function addtraining(Request $request){
+			return $request->all();
+		}
+
 	public function showSchedule(){
         if (Auth::check()) {
             return view('schedule', ['pelatihan' =>
-                        DB::table('Pelatihan')->get()]);   
+                        DB::table('Pelatihan')->get()]);
         }
 	}
+
 }

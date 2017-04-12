@@ -45,12 +45,6 @@ class EmployeeProfil extends BaseController
           else return redirect('employees');
       }
       else return redirect('login');
-      // $id_pegawai = Request::segment(2);
-      // $employeeBioData = DB::table('Pegawai')
-      //             -> select('id', 'name', 'gaji_pegawai', 'jenis_kelamin', 'jabatan', 'tanggal_masuk', 'email', 'tanggal_lahir')
-      //             ->where('id', $id_pegawai)
-      //             ->get();
-     
     }
 
     public function schedule(){

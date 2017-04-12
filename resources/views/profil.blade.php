@@ -103,10 +103,10 @@
     <div class="main-panel">
       <div class="container-fluid">
         <div class="panel panel-default">
-          <div class="panel-heading">
-            <h1 class="panel-title"> Employee Information </h1>
+          <div class="panel panel-heading">
+            <h1 class="panel panel-title"> Employee Information </h1>
           </div>
-          <div class="panel-body">
+          <div class="panel panel-body">
             <div class="row">
               @foreach ($employeeBioData as $employeeData):
               @if ($employeeData -> jenis_kelamin === "L")
@@ -238,7 +238,6 @@
          </div>
 
         </div>
-    </div>
 </body>
 
     <!--   Core JS Files   -->
