@@ -32,7 +32,7 @@
 
     <!--  Light Bootstrap Table core CSS    -->
     {{HTML::style('css/light-bootstrap-dashboard.css')}}
-    
+
     <!-- CSS for action-bar-->
     {{HTML::style('css/action-bar.css')}}
 
@@ -80,11 +80,8 @@
             <nav class="navbar navbar-default navbar-fixed">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        
                         <a class="navbar-brand" href="#">Training Schedule</a>
                     </div>
-
-                   
 
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -92,9 +89,13 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#">
-                                    <p>Log out</p>
+                                <a href="{{ route('logout') }}"onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                 	<p>{{ Auth::user()->name }}</p>
                                 </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
                             <li class="separator hidden-lg hidden-md"></li>
                         </ul>
@@ -104,7 +105,6 @@
         </div>
 
         <div class="main-panel">
-            
             <div class="content">
                 <div class="container-fluid">
                     <div class="row" style="margin-bottom: 0px;">
@@ -112,11 +112,12 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">Training Schedule</h4>
-                                    
                                 </div>
 
                                 <div class="content table-responsive table-full-width">
-                                	
+                                </div>
+
+                                <div class="content table-responsive table-full-width">
                                     <table id="table-content" class="table table-hover table-striped display">
 
                                         <!-- <p id="sub-header" style="margin-bottom: 35px;"></p> -->

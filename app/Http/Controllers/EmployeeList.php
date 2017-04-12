@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 class EmployeeList extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -18,47 +20,55 @@ class EmployeeList extends BaseController
 
     public function getEmployeesData() {
 
-    	$employees = DB::table('Pegawai')
-    								-> select('Pegawai.id', 'name', 'gaji_pegawai', 
-    								'jenis_kelamin', 'jabatan', 'tanggal_masuk', 'email', 'tanggal_lahir')->get();
+        if(Auth::check()) {
 
-    	$android_employees = array();
+            if (Auth::user()->role == 'msdm') {
+                $employees = DB::table('Pegawai')
+                            -> select('Pegawai.id', 'name', 'gaji_pegawai',
+                            'jenis_kelamin', 'jabatan', 'tanggal_masuk', 'email', 'tanggal_lahir')->get();
+            
+                $android_employees = array();
 
-    	$ios_employees = array();
+                $ios_employees = array();
 
-    	$web_employees = array();
-
-
-    	foreach ($employees as $employee) {
-    		switch ($employee->jabatan) {
-    			case 'Android Developer':
-    				array_push($android_employees, $employee);
-    				break;
-    			case 'IOS Developer' :
-    				array_push($ios_employees, $employee);
-    				break;
-    			case 'Web Developer' :
-    				array_push($web_employees, $employee);
-    				break;
-    		}
-    	}
-
-    	$employees_score = DB::table('Pegawai')
-    								-> join('Partisipasi', 'Pegawai.id', '=', 'Partisipasi.id_pegawai')
-    								-> select('Pegawai.id', 'nilai_pelatihan')->get();
-
-    	$employees_project_count = DB::table('Pengerjaan')
-    								->select('id_pegawai', DB::raw('count(id_pegawai) as project_count'))
-    								->groupBy('id_pegawai')
-    								->get();
+                $web_employees = array();
 
 
+                foreach ($employees as $employee) {
+                    switch ($employee->jabatan) {
+                        case 'Android Developer':
+                            array_push($android_employees, $employee);
+                            break;
+                        case 'IOS Developer' :
+                            array_push($ios_employees, $employee);
+                            break;
+                        case 'Web Developer' :
+                            array_push($web_employees, $employee);
+                            break;
+                    }
+                }
 
-    	return view('employelist', ['android_dev' => $android_employees,
-    								'IOS_dev' => $ios_employees,
-    								'web_dev' => $web_employees,
-    								'employees_score' => $employees_score,
-    								'employees_project_count' => $employees_project_count]);
+                $employees_score = DB::table('Pegawai')
+                                            -> join('Partisipasi', 'Pegawai.id', '=', 'Partisipasi.id_pegawai')
+                                            -> select('Pegawai.id', 'nilai_pelatihan')->get();
+
+                $employees_project_count = DB::table('Pengerjaan')
+                                            ->select('id_pegawai', DB::raw('count(id_pegawai) as project_count'))
+                                            ->groupBy('id_pegawai')
+                                            ->get();
+
+
+
+                return view('employelist', ['android_dev' => $android_employees,
+                                            'IOS_dev' => $ios_employees,
+                                            'web_dev' => $web_employees,
+                                            'employees_score' => $employees_score,
+                                            'employees_project_count' => $employees_project_count]);
+            }
+            else return redirect('profil');
+        }
+
+        else return redirect('login');
     }
 
 
@@ -98,4 +108,11 @@ class EmployeeList extends BaseController
     						['id_pelatihan','=', $id_pelatihan])
     		->update('nilai_pelatihan', $score);
     }
+
+	public function showSchedule(){
+        if (Auth::check()) {
+            return view('schedule', ['pelatihan' =>
+                        DB::table('Pelatihan')->get()]);   
+        }
+	}
 }
