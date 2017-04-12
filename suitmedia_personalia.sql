@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 08, 2017 at 02:42 PM
+-- Generation Time: Apr 12, 2017 at 03:46 PM
 -- Server version: 5.7.17-0ubuntu0.16.04.2
--- PHP Version: 7.0.17-2+deb.sury.org~xenial+1
+-- PHP Version: 7.0.17-3+deb.sury.org~xenial+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -38,9 +38,9 @@ CREATE TABLE `Partisipasi` (
 --
 
 INSERT INTO `Partisipasi` (`id_pegawai`, `id_pelatihan`, `keterangan`, `nilai_pelatihan`) VALUES
-(3, 1, 'Pelatihan untuk keamanan jaringan', -1),
+(3, 1, 'Pelatihan untuk keamanan jaringan', 70),
 (3, 2, 'Pelatihan untuk sistem terdistribusi', -1),
-(3, 3, 'Pelatihan untuk enkripsi data', -1);
+(3, 3, 'Pelatihan untuk enkripsi data', 85);
 
 -- --------------------------------------------------------
 
@@ -59,17 +59,19 @@ CREATE TABLE `Pegawai` (
   `username_pegawai` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `tanggal_lahir` date NOT NULL,
-  `remember_token` varchar(255) NOT NULL
+  `remember_token` varchar(255) NOT NULL,
+  `role` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Pegawai`
 --
 
-INSERT INTO `Pegawai` (`id`, `name`, `gaji_pegawai`, `jenis_kelamin`, `jabatan`, `tanggal_masuk`, `email`, `username_pegawai`, `password`, `tanggal_lahir`, `remember_token`) VALUES
-(1, 'Ade Surya Ramadhani', 9000000, 'L', 'Web Developer', '2017-04-04', 'adesu@gmail.com', 'adesu', 'root', '1996-05-03', ''),
-(2, 'Gaudensius Dimas ', 9500000, 'L', 'IOS Developer', '2017-04-04', 'gauden@gmail.com', 'gauden', 'root', '1996-04-05', ''),
-(3, 'Anwar Ramadha', 10000000, 'L', 'Android Developer', '2017-04-04', 'anwar.ramadha@gmail.com', 'anwarramadha', '$2y$10$E0RFR2RnqB0Pfv6HKWDWsulzfgamxziyL/Ay/kXUaZZGhbkK.NrUi', '1996-01-22', 'uWEUDM8iXgpiCCUWJXwBfqMbxzBguMXNIeVVqy0vR912GdlVXSqG9wJEsEsw');
+INSERT INTO `Pegawai` (`id`, `name`, `gaji_pegawai`, `jenis_kelamin`, `jabatan`, `tanggal_masuk`, `email`, `username_pegawai`, `password`, `tanggal_lahir`, `remember_token`, `role`) VALUES
+(1, 'Ade Surya Ramadhani', 9000000, 'L', 'Web Developer', '2017-04-04', 'adesu@gmail.com', 'adesu', 'root', '1996-05-03', '', 'teknikal'),
+(2, 'Gaudensius Dimas ', 9500000, 'L', 'IOS Developer', '2017-04-04', 'gauden@gmail.com', 'gauden', 'root', '1996-04-05', '', 'teknikal'),
+(3, 'Anwar Ramadha', 10000000, 'L', 'Android Developer', '2017-04-04', 'anwar.ramadha@gmail.com', 'anwarramadha', '$2y$10$E0RFR2RnqB0Pfv6HKWDWsulzfgamxziyL/Ay/kXUaZZGhbkK.NrUi', '1996-01-22', 'cJqTywtR9nebbSRmpgORluQzvZlXBBDhBi8aarI8sJzk7fUcQ1Vk034lz82g', 'teknikal'),
+(4, 'Ikhwanul Muslimin', 10000000, 'L', 'MSDM', '2017-04-04', 'ikhwan@gmail.com', 'ikhwan', '$2y$10$E0RFR2RnqB0Pfv6HKWDWsulzfgamxziyL/Ay/kXUaZZGhbkK.NrUi', '2017-04-01', 'XvqxbWYjKeuUQ5NjYXo2tDafpDGe30xbeDJObtzUDSOvqkGNDK0cNitRDg9T', 'msdm');
 
 -- --------------------------------------------------------
 
@@ -170,7 +172,7 @@ ALTER TABLE `Proyek`
 -- AUTO_INCREMENT for table `Pegawai`
 --
 ALTER TABLE `Pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `Pelatihan`
 --
