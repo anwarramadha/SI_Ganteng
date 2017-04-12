@@ -103,4 +103,12 @@ class EmployeeList extends BaseController
 			return view('schedule', ['pelatihan' =>
 																	DB::table('Pelatihan')->get()]);
 		}
+
+		public function addtrainingpage(){
+			return view('training');
+		}
+
+		public function addtraining(Request $request){
+			return $request->all();
+		}
 }
