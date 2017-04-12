@@ -10,6 +10,6 @@ Personalia adalah program yang dapat digunakan sebagai sebagai manajemen pelatih
 
 ## Using Personalia
 
-Personalia dapat digunakan dengan mudah dengan tampilan yang simpel tapi menarik. Anda hanya perlu masuk dan pantau perkembangan dari pegawai anda.
+Personalia dapat digunakan dengan mudah dengan tampilan yang simpel tapi menarik. Anda hanya perlu masuk dan pantau perkembangan dari pegawai anda. Selain itu, anda juga dapat mengubah nilai-nilai yang telah didapat oleh pegawai-pegawai anda. Fitur-fitur lain yang disediakan adalah anda dapat melihat detail-detail dari setiap pegawai di perusahaan anda. Pegawai anda juga dapat melihat profil mereka sendiri melalui page yang berbeda.
 
 
