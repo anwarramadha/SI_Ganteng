@@ -1,7 +1,7 @@
 <p align="center"><img src="people.png"></p>
 
 <p align="center">
-<h1>Personalia</h1>
+<h1 align="center">Personalia</h1>
 </p>
 
 ## About Laravel
