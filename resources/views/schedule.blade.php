@@ -72,6 +72,13 @@
                             <p>Training Schedule</p>
                         </a>
                     </li>
+
+										<li>
+                    	<a href={{ URL::to('/addtrainingpage') }}>
+                    		<i class="pe-7s-plus"></i>
+                    		<p>Add Training</p>
+                    	</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -126,8 +133,8 @@
                                             <ul id="action-bar-parent" class="action-bar clearfix">
                                                 <li>
                                                     <a>
-                                                        <span id="record-name"> &nbsp&nbsp Document</span>   
-                                                    </a> 
+                                                        <span id="record-name"> &nbsp&nbsp Document</span>
+                                                    </a>
                                                 </li>
 
                                                 <li>
@@ -155,7 +162,7 @@
 
                                         <tbody>
                                             <?php $i = 1; ?>
-                                            @foreach($pelatihan as $latihan) 
+                                            @foreach($pelatihan as $latihan)
                                                 <tr>
                                                     <td>{{ $i }}</td>
                                                     <td>{{ $latihan->nama_trainer }}</td>
