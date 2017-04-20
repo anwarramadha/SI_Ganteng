@@ -74,12 +74,7 @@
                         </a>
                     </li>
 
-										<li>
-                    	<a href={{ URL::to('/addtrainingpage') }}>
-                    		<i class="pe-7s-plus"></i>
-                    		<p>Add Training</p>
-                    	</a>
-                    </li>
+										
                 </ul>
             </div>
         </div>

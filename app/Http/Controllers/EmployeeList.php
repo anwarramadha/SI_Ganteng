@@ -1,14 +1,16 @@
 <?php
-	namespace App\Http\Controllers;
 
+namespace App\Http\Controllers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
+use Log;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
-
 use Illuminate\Support\Facades\Auth;
+
 
 class EmployeeList extends BaseController
 {
@@ -116,7 +118,56 @@ class EmployeeList extends BaseController
 		}
 
 		public function addtraining(Request $request){
-			return $request->all();
+
+			Log::info($request->nama_trainer);
+			$nama_trainer = $request->nama_trainer;
+			$waktu_pelaksanaan = $request->training_date;
+			$deskripsi_pelatihan = $request ->deskripsi;
+			$jabatan = $request->pegawai;
+			$id_pelatihan = DB::table('pelatihan')->insertGetId(
+				['nama_trainer' => $nama_trainer,'waktu_pelaksanaan' => $waktu_pelaksanaan,'deskripsi_pelatihan' => $deskripsi_pelatihan]
+			);
+
+			if($jabatan == 'web' or $jabatan == 'all'){
+				$allPegawaiWebId = DB::table('pegawai')
+														->select('id')
+														->where('jabatan','Web Developer')
+														->get();
+				foreach ($allPegawaiWebId as $pegawaiWebId) {
+					$id_pegawai = $pegawaiWebId->id;
+					$ret = DB::table('partisipasi') -> insert(
+							['id_pegawai' => $id_pegawai , 'id_pelatihan' => $id_pelatihan ,'keterangan' => $deskripsi_pelatihan, 'nilai_pelatihan' => -1]
+						);
+				}
+			}
+
+			if($jabatan == 'mobile' or $jabatan == 'all'){
+				$allPegawaiWebId = DB::table('pegawai')
+														->select('id')
+														->where('jabatan','Android Developer')
+														->get();
+				foreach ($allPegawaiWebId as $pegawaiWebId) {
+					$id_pegawai = $pegawaiWebId->id;
+					$ret = DB::table('partisipasi') -> insert(
+							['id_pegawai' => $id_pegawai , 'id_pelatihan' => $id_pelatihan ,'keterangan' => $deskripsi_pelatihan, 'nilai_pelatihan' => -1]
+						);
+				}
+			}
+
+			if($jabatan == 'ios' or $jabatan == 'all'){
+				$allPegawaiWebId = DB::table('pegawai')
+														->select('id')
+														->where('jabatan','IOS Developer')
+														->get();
+				foreach ($allPegawaiWebId as $pegawaiWebId) {
+					$id_pegawai = $pegawaiWebId->id;
+					$ret = DB::table('partisipasi') -> insert(
+							['id_pegawai' => $id_pegawai , 'id_pelatihan' => $id_pelatihan ,'keterangan' => $deskripsi_pelatihan, 'nilai_pelatihan' => -1]
+						);
+				}
+			}
+
+			return redirect('schedule');
 		}
 
 	public function showSchedule(){

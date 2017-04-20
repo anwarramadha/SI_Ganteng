@@ -126,46 +126,47 @@
 
     <div class="main-panel">
       <div class="container-fluid">
-          <div class="row" style="margin-bottom: 0px;">
-              <div class="col-md-12">
-                  <div class="card">
-                      
-                      <div class="content table-responsive table-full-width">
-                          <table id="table-content" class="table table-hover table-striped display">
+      
+              <div class="col-md-6">
+
+
+
+
                             <form name="form_pegawai" action="/actionadd" method="POST">
                               {!! csrf_field() !!}
-                                <div class="form-group">
+
                                     <label for="inputtrainer">Trainer Name</label>
                                     <input type="nama" class="form-control" id="inputtrainer" placeholder="Nama trainer" name="nama_trainer">
-                                </div>
-                                <div class="form-group">
+
+
                                     <label for="inputdate">Training Date</label>
                                     <input type="date" class="form-control" id="inputdate" name="training_date">
-                                </div>
 
-                                <div class="form-group">
+
+
                                     <label for="deksripsi">Deskripsi</label>
                                     <input type="text" class="form-control" id="deskripsi" name="deskripsi">
+
+                                <div class="radio">
+                                    <label><input type="radio" name="pegawai" value="web">Web Developer</label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="pegawai">Web Developer</label>
+                                    <label><input type="radio" name="pegawai" value="mobile">Android Developer</label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="pegawai">Mobile Developer</label>
+                                    <label><input type="radio" name="pegawai" value="ios">Ios Developer</label>
                                 </div>
                                 <div class="radio">
-                                    <label><input type="radio" name="pegawai">Ios Developer</label>
-                                </div>
-                                <div class="radio">
-                                    <label><input type="radio" name="pegawai">All Developer</label>
+                                    <label><input type="radio" name="pegawai" value="all">All Developer</label>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="reset" class="btn btn-primary"> Clear </button>
                             </form>
-                          </table>
-                      </div>
-                    </div>
+
+
+
                   </div>
-                </div>
+
 
               </div>
             </div>

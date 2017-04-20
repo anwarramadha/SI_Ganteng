@@ -72,13 +72,14 @@
                             <p>Training Schedule</p>
                         </a>
                     </li>
-
+										<!-- @if(Auth::user()->role == 'msdm') -->
 										<li>
                     	<a href={{ URL::to('/addtrainingpage') }}>
                     		<i class="pe-7s-plus"></i>
                     		<p>Add Training</p>
                     	</a>
                     </li>
+										<!-- @endif -->
                 </ul>
             </div>
         </div>
